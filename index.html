@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sistema de alumnos</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<!-- ENCABEZADO -->
+
+<header class="encabezado">
+    <div>
+        <h1>Sistema de alumnos</h1>
+        <p>Registro y administración de estudiantes</p>
+    </div>
+
+    <button
+        type="button"
+        id="btnCerrarSesion"
+        class="boton-secundario"
+    >
+        Cerrar sesión
+    </button>
+
+    <a
+        href="./imprimirqr_todoslosalumnos.html"
+        class="boton-principal boton-impresion-total"
+    >
+        Imprimir QR de todos los alumnos
+    </a>
+</header>
+
+
+<!-- REGISTRO -->
+
+<section class="tarjeta">
+
+    <h2>Registrar alumno</h2>
+
+    <div class="formulario">
+
+        <div class="campo">
+            <label for="nombre">Nombre</label>
+
+            <input
+                type="text"
+                id="nombre"
+                placeholder="Ejemplo: Juan"
+            >
+        </div>
+
+
+        <div class="campo">
+            <label for="apellido">Apellido</label>
+
+            <input
+                type="text"
+                id="apellido"
+                placeholder="Ejemplo: Pérez García"
+            >
+        </div>
+
+
+        <div class="campo">
+            <label for="grado">Grado</label>
+
+            <select id="grado">
+
+                <option value="">
+                    Seleccionar grado
+                </option>
+
+                <option value="1ro">1ro</option>
+                <option value="2do">2do</option>
+                <option value="3ro">3ro</option>
+                <option value="4to">4to</option>
+                <option value="5to">5to</option>
+
+            </select>
+        </div>
+
+
+        <div class="campo">
+            <label for="seccion">Sección</label>
+
+            <select id="seccion">
+
+                <option value="">
+                    Seleccionar sección
+                </option>
+
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+                <option value="J">J</option>
+
+            </select>
+        </div>
+
+
+        <div class="campo">
+
+            <label for="telefono">
+                Número de padre, madre o apoderado
+                <span>(opcional)</span>
+            </label>
+
+            <input
+                type="tel"
+                id="telefono"
+                placeholder="Ejemplo: 987654321"
+                maxlength="9"
+            >
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="boton-principal"
+        id="btnRegistrar"
+    >
+        Registrar alumno
+    </button>
+
+
+    <p id="mensaje"></p>
+
+</section>
+
+
+<!-- RESULTADO DEL REGISTRO -->
+
+<section
+    class="tarjeta resultado"
+    id="resultado"
+>
+
+    <div class="resultado-header">
+
+        <div>
+            <h2>Alumno registrado</h2>
+            <p>El alumno fue guardado correctamente.</p>
+        </div>
+
+    </div>
+
+
+    <div class="datos-registrados">
+
+        <p>
+            <strong>Nombre:</strong>
+            <span id="mostrarNombre"></span>
+        </p>
+
+        <p>
+            <strong>Apellido:</strong>
+            <span id="mostrarApellido"></span>
+        </p>
+
+        <p>
+            <strong>Grado:</strong>
+            <span id="mostrarGrado"></span>
+        </p>
+
+        <p>
+            <strong>Sección:</strong>
+            <span id="mostrarSeccion"></span>
+        </p>
+
+        <p>
+            <strong>Apoderado:</strong>
+            <span id="mostrarTelefono"></span>
+        </p>
+
+        <p>
+            <strong>ID:</strong>
+            <span
+                class="id"
+                id="mostrarId"
+            ></span>
+        </p>
+
+    </div>
+
+
+    <div id="qrcode"></div>
+
+</section>
+
+
+<!-- LISTA -->
+
+<section class="tarjeta lista">
+
+    <div class="lista-header">
+
+        <div>
+
+            <h2>Alumnos registrados</h2>
+
+            <p id="contador">
+                Cargando alumnos...
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FILTROS -->
+
+    <div class="filtros">
+
+        <div class="busqueda">
+
+            <label for="buscar">
+                Buscar alumno
+            </label>
+
+            <input
+                type="search"
+                id="buscar"
+                placeholder="Nombre, apellido o ID..."
+            >
+
+        </div>
+
+
+        <div>
+
+            <label for="filtroGrado">
+                Grado
+            </label>
+
+            <select id="filtroGrado">
+
+                <option value="">
+                    Todos los grados
+                </option>
+
+                <option value="1ro">1ro</option>
+                <option value="2do">2do</option>
+                <option value="3ro">3ro</option>
+                <option value="4to">4to</option>
+                <option value="5to">5to</option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label for="filtroSeccion">
+                Sección
+            </label>
+
+            <select id="filtroSeccion">
+
+                <option value="">
+                    Todas
+                </option>
+
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="G">G</option>
+                <option value="H">H</option>
+                <option value="I">I</option>
+                <option value="J">J</option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="boton-secundario"
+            id="btnLimpiarFiltros"
+        >
+            Limpiar filtros
+        </button>
+
+    </div>
+
+
+    <!-- TABLA -->
+
+    <div class="tabla-contenedor">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Alumno</th>
+                    <th>Grado</th>
+                    <th>Sección</th>
+                    <th>Num Apoderado</th>
+                    <th>ID</th>
+                    <th>Acciones</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="tablaAlumnos">
+
+                <tr>
+
+                    <td colspan="6">
+                        Cargando alumnos...
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</div>
+
+<!-- MODAL VER ALUMNO -->
+
+<div
+    class="modal"
+    id="modalVer"
+>
+
+<div class="modal-contenido">
+
+    <button
+        class="cerrar"
+        onclick="cerrarModal('modalVer')"
+    >
+        ×
+    </button>
+
+    <h2>Información del alumno</h2>
+
+    <div id="datosModal"></div>
+
+</div>
+
+</div>
+
+<!-- MODAL QR -->
+
+<div
+    class="modal"
+    id="modalQR"
+>
+
+<div class="modal-contenido modal-qr">
+
+    <button
+        class="cerrar"
+        onclick="cerrarModal('modalQR')"
+    >
+        ×
+    </button>
+
+    <h2>QR del alumno</h2>
+
+    <p id="nombreQR"></p>
+
+    <div id="qrcodeModal"></div>
+
+    <p class="id">
+        <span id="idQR"></span>
+    </p>
+
+</div>
+
+</div>
+
+<!-- LIBRERÍA QR -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- JAVASCRIPT -->
+ 
+
+<script
+    type="module"
+    src="./app.js"
+></script>
+
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acceso administrativo</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <main class="contenedor-login">
+
+        <section class="tarjeta login-card">
+
+            <div class="login-header">
+                <h1>Sistema de alumnos</h1>
+                <p>Acceso administrativo</p>
+            </div>
+
+
+            <form id="formLogin">
+
+                <div class="campo">
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        placeholder="Ingrese su correo"
+                        required
+                    >
+                </div>
+
+
+                <div class="campo">
+                    <label for="contrasena">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="contrasena"
+                        placeholder="Ingrese su contraseña"
+                        required
+                    >
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="boton-principal"
+                    id="btnLogin"
+                >
+                    Iniciar sesión
+                </button>
+
+            </form>
+
+
+            <p
+                id="mensajeLogin"
+                class="mensaje-login"
+            ></p>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="./login.js">
+    </script>
+
+</body>
+
+</html>
